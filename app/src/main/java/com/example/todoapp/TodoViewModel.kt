@@ -1,6 +1,7 @@
 package com.example.todoapp
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +14,8 @@ class TodoViewModel : ViewModel() {
     val todoList:LiveData<List<Todo>> = _todoList
 
 
-    fun getAllTodo(){
+    private fun getAllTodo(){
+        Log.i("ss", "getAllTodo:  ")
     _todoList.value= TodoManager.getAllTodo()
     }
 

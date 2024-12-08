@@ -1,6 +1,7 @@
 package com.example.todoapp
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -39,6 +40,7 @@ import java.text.SimpleDateFormat
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun TodoListPage(viewModel: TodoViewModel) {
+
     val todoList by viewModel.todoList.observeAsState()
     var inputText by remember {
         mutableStateOf("")
@@ -59,27 +61,35 @@ fun TodoListPage(viewModel: TodoViewModel) {
             })
             Button(onClick = {
                 viewModel.addTodo(inputText)
-                inputText=""
+                inputText = ""
             }) {
                 Text(text = "Add")
             }
         }
         todoList?.let {
+
             LazyColumn(content = {
-                itemsIndexed(it) { index: Int, item: Todo ->
+                itemsIndexed(it) {
+
+                        index: Int, item: Todo ->
                     TodoItem(item = item, onDelete = {
                         viewModel.deleteTodo(item.id)
-                        viewModel.getAllTodo()
+                        inputText = ""
+
                     })
                 }
             })
-        }?:Text(modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center,text = "No items found")
+        } ?: Text(
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            text = "No items found"
+        )
     }
 
 }
 
 @Composable
-fun TodoItem(item: Todo,onDelete:()->Unit) {
+fun TodoItem(item: Todo, onDelete: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
