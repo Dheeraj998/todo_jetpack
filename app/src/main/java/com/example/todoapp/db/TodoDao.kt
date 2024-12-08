@@ -1,0 +1,18 @@
+package com.example.todoapp.db
+
+import androidx.lifecycle.LiveData
+import androidx.room.Insert
+import androidx.room.Query
+import com.example.todoapp.Todo
+
+interface TodoDao {
+
+    @Query("SELECT * FROM TODO")
+    fun getAllTodo(): LiveData<List<Todo>>
+
+    @Insert
+    fun addTodo(todo: Todo)
+ @Query("DELETE FROM Todo Where id= :id")
+    fun deleteTodo(id: Int)
+
+}
