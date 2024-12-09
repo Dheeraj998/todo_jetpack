@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
 
-    id("com.google.devtools.ksp") version "2.1.0-1.0.29"
+//    id("com.google.devtools.ksp") version "2.1.0-1.0.29"
+//    kotlin("kapt") version "2.1.0
+    id("kotlin-kapt")
 }
 
 android {
@@ -76,8 +78,10 @@ dependencies {
 
     // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
     // See Add the KSP plugin to your project
-    ksp("androidx.room:room-compiler:$room_version")
+//    ksp("androidx.room:room-compiler:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
+  kapt("androidx.room:room-compiler:$room_version")
+
 
 
 }
